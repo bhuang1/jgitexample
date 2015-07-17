@@ -15,14 +15,4 @@
         </a:detailViewCfg>
         <a:defaultSortInfo>
             <field>=&quot;hello&quot;</field>
-            <ascending>true</ascending>
-        </a:defaultSortInfo>
-        <a:isSystem>false</a:isSystem>
-        <a:dataSrcExpr></a:dataSrcExpr>
-        <a:facetsListExpr></a:facetsListExpr>
-        <a:defaultFiltersExpr></a:defaultFiltersExpr>
-        <a:security>16383</a:security>
-    </recordType>
-    <roleMap/>
-</recordTypeHaul>
- 
+            <asce 

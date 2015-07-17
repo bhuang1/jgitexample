@@ -37,14 +37,4 @@
             <users/>
             <groups/>
         </role>
-        <role allowForAll="false" inherit="false" name="denyAuthors">
-            <users/>
-            <groups/>
-        </role>
-        <role allowForAll="false" inherit="false" name="denyAdministrators">
-            <users/>
-            <groups/>
-        </role>
-    </roleMap>
-</contentHaul>
- 
+        <role allowForAll="false" inherit="false" name="deny 
