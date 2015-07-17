@@ -18,7 +18,76 @@
   firstColumnContents: {
     #&quot;SYSTEM_SYSRULES_milestoneField&quot;(
       labelPosition: &quot;COLLAPSED&quot;,
-      steps: {&quot;Requested&quot;, &quot;Approved&quot;, &quot;Submitted to Vendor&quot;, &quot;Received&quot;}0, 50.99, 61.98, 412.97}), alignment: &quot;RIGHT&quot;)
+      steps: {&quot;Requested&quot;, &quot;Approved&quot;, &quot;Submitted to Vendor&quot;, &quot;Received&quot;},
+      active: 3
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;PR #&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: &quot;123456789&quot;,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_pickerFieldUsers&quot;(
+          label: &quot;Requested By&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: loggedInUser(),
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Department&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: &quot;Sales&quot;,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_dateField&quot;(
+          label: &quot;Due Date&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: today(),
+          readOnly: true
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Shipping Address&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: &quot;123 Sesame Street&quot;,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;City&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: &quot;New York&quot;,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;State/Province&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: &quot;NY&quot;,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Zip/Postal Code&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          value: &quot;12345&quot;,
+          readOnly: true
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Items&quot;,
+      firstColumnContents: {
+        /* This grid is not configured to page or sort */
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          labelPosition: &quot;ABOVE&quot;,
+          totalCount: 5,
+          columns: {
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Description&quot;, data: {&quot;Mobile device for demos&quot;, &quot;Video software upgrade&quot;, &quot;Device accessories&quot;}),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Category&quot;, data: {&quot;Hardware&quot;, &quot;Software&quot;, &quot;Miscellaneous&quot;}),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Qty&quot;, data: {2, 1, 2}, alignment: &quot;RIGHT&quot;),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Unit Price&quot;, data: {dollar({150, 50.99, 30.99}), &quot;Total&quot;}, alignment: &quot;RIGHT&quot;),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Amount&quot;, data: dollar({300, 50.99, 61.98, 412.97}), alignment: &quot;RIGHT&quot;)
           },
           value: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex: 1, batchSize: 5),
           saveInto: {}
@@ -121,4 +190,36 @@
   },
   secondColumnContents: {}
 )</definition>
-        <preferredE 
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>Administrator</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 
