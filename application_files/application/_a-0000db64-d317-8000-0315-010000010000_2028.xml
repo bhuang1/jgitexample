@@ -18,7 +18,7 @@
         <published>false</published>
         <public>false</public>
         <associatedObjects>
-            <globalIdMap>
+            <globalIdMap> 
                 <item>
                     <type>datatype</type>
                     <uuids>
