@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_averageMeetingUsefulnessReports</name>
+        <uuid>3e2e3c97-8509-4ed1-b95b-4015b42aeee9</uuid>
+        <description>SAIL interface for the Average Meeting Usefulness Report</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38179</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(&#xD;
+  local!user,&#xD;
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+    startIndex: 1,&#xD;
+    batchSize: 20,&#xD;
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(&#xD;
+      field: &quot;creatorUsername&quot;,&#xD;
+      ascending: true&#xD;
+    )&#xD;
+  ),&#xD;
+  with(&#xD;
+    local!datasubset: #&quot;SYSTEM_SYSRULES_queryEntity&quot;(&#xD;
+      entity: #&quot;_a-0000dac9-871e-8000-9ba2-011c48011c48_37729&quot;,&#xD;
+      query: #&quot;SYSTEM_SYSRULES_query&quot;(&#xD;
+        aggregation: #&quot;SYSTEM_SYSRULES_queryAggregation&quot;(aggregationColumns: {&#xD;
+          #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(field: &quot;creatorUsername&quot;, isGrouping: true),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(field: &quot;postMeetingRating&quot;, aggregationFunction: &quot;AVG&quot;)&#xD;
+        }),&#xD;
+        filter:&#xD;
+          if(#&quot;_a-0000d62a-67b3-8000-da6f-010000010000_951&quot;({local!user}),&#xD;
+          null,&#xD;
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(&#xD;
+            field: &quot;creatorUsername&quot;,&#xD;
+            operator: &quot;includes&quot;,&#xD;
+            value: tostring(local!user[1])&#xD;
+          )&#xD;
+          ),&#xD;
+        pagingInfo: local!pagingInfo&#xD;
+      )&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(&#xD;
+      firstColumnContents:{&#xD;
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+          firstColumnContents:{&#xD;
+            #&quot;SYSTEM_SYSRULES_pickerFieldUsers&quot;(&#xD;
+              label: &quot;Meeting Creator&quot;,&#xD;
+              instructions: &quot;Type the name of a user to filter the data by meeting creator&quot;,&#xD;
+              maxSelections: 1,&#xD;
+              groupFilter: #&quot;_a-0000dac9-871e-8000-9ba2-011c48011c48_37733&quot;,&#xD;
+              value: local!user,&#xD;
+              saveInto: {&#xD;
+                local!user,&#xD;
+                a!save(local!pagingInfo.startIndex, 1)&#xD;
+              }&#xD;
+            )&#xD;
+          },&#xD;
+          secondColumnContents:{&#xD;
+            #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+              readOnly:true&#xD;
+            )&#xD;
+          }&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+          firstColumnContents:{&#xD;
+            if(local!datasubset.totalCount&gt;0,&#xD;
+            &#xD;
+              #&quot;SYSTEM_SYSRULES_gridField&quot;(&#xD;
+              totalCount: local!datasubset.totalCount,&#xD;
+              columns: {&#xD;
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                  label: &quot;Meeting Creator&quot;,&#xD;
+                  field: &quot;creatorUsername&quot;,&#xD;
+                  data: apply(#&quot;_a-0000d690-12fb-8000-0f1a-010000010000_1352&quot;,index(local!datasubset.data, &quot;creatorUsername&quot;, null))&#xD;
+                ),&#xD;
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                  label: &quot;Average Usefulness Rating&quot;,&#xD;
+                  field: &quot;postMeetingRating&quot;,&#xD;
+                  data: index(local!datasubset.data, &quot;postMeetingRating&quot;, null)&#xD;
+                )&#xD;
+              },&#xD;
+              value: local!pagingInfo,&#xD;
+              saveInto: local!pagingInfo&#xD;
+            )&#xD;
+            ,&#xD;
+            #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+            value:&quot;No Records Found&quot;,&#xD;
+            readOnly:true&#xD;
+            )&#xD;
+            )&#xD;
+          }&#xD;
+        )&#xD;
+      }&#xD;
+    )&#xD;
+  )&#xD;
+)&#xD;
+</definition>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 

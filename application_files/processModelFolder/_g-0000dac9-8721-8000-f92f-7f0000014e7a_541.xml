@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<processModelFolderHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <processModelFolder>
+        <name>MMS Process Models</name>
+        <uuid>_g-0000dac9-8721-8000-f92f-7f0000014e7a_541</uuid>
+        <description>All process models for the Meeting Management System application</description>
+    </processModelFolder>
+    <roleMap>
+        <role name="EDITOR">
+            <users/>
+            <groups/>
+        </role>
+        <role name="MANAGER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="ADMIN_OWNER">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role name="EXPLICIT_NONMEMBER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="VIEWER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="INITIATOR">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</processModelFolderHaul>
+ 

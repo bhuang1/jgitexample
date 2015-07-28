@@ -1,40 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <applicationHaul xmlns:a="http://www.appian.com/ae/types/2009">
     <application>
-        <name>Test Application</name>
-        <uuid>_a-0000db64-d317-8000-0315-010000010000_2028</uuid>
-        <description/>
+        <name>MMS Application</name>
+        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38191</uuid>
+        <description>Meeting Management System Application</description>
         <parentUuid>SYSTEM_APPLICATIONS_ROOT</parentUuid>
         <visibility>
             <advertise>false</advertise>
             <hierarchy>true</hierarchy>
             <indexable>true</indexable>
-            <quota>false</quota> 
+            <quota>false</quota>
             <searchable>true</searchable>
-            <system>false</system> 
+            <system>false</system>
             <unlogged>false</unlogged>
         </visibility>
-        <urlIdentifier>702xMw</urlIdentifier>
-        <published>false</published>
+        <urlIdentifier>mms_application</urlIdentifier>
+        <published>true</published>
         <public>false</public>
         <associatedObjects>
-            <globalIdMap> 
+            <globalIdMap>
                 <item>
                     <type>datatype</type>
                     <uuids>
-                        <uuid>{https://test79.appianci.net/suite/types/}TEST_cdt</uuid>
-                    <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Attendees.xsd</uuid>
-                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Meeting_Summary.xsd</uuid>
-                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Notes.xsd</uuid>
-                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Reminders.xsd</uuid>
-                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Meeting_Usefulness_View.xsd</uuid>
+                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Attendees</uuid>
+                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Meeting_Summary</uuid>
+                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Notes</uuid>
+                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Reminders</uuid>
+                        <uuid>{https://tcstemp.appiancloud.com/suite/types/}MMS_Meeting_Usefulness_View</uuid>
                     </uuids>
                 </item>
                 <item>
                     <type>dataStore</type>
                     <uuids>
-                        <uuid>_a-0000db64-d317-8000-0315-010000010000_2029</uuid>
-                    <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37691</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37691</uuid>
                     </uuids>
                 </item>
                 <item>
@@ -53,18 +51,15 @@
                         <uuid>_e-0000dac9-8719-8000-9aee-01075c01075c_514</uuid>
                         <uuid>_e-0000dac9-8719-8000-9aee-01075c01075c_515</uuid>
                         <uuid>_e-0000dac9-8719-8000-9aee-01075c01075c_512</uuid>
-                        <uuid>_e-0000da2a-50f4-8000-9aee-01075c01075c_229</uuid>
-                        <uuid>_e-0000da2a-50f4-8000-9aee-01075c01075c_230</uuid>
                         <uuid>_e-0000da2a-50f4-8000-9aee-01075c01075c_228</uuid>
+                        <uuid>_e-0000da2a-50f4-8000-9aee-01075c01075c_230</uuid>
+                        <uuid>_e-0000da2a-50f4-8000-9aee-01075c01075c_229</uuid>
                     </uuids>
                 </item>
                 <item>
                     <type>content</type>
                     <uuids>
-                        <uuid>d6a0ccac-8601-4d2d-91e3-368ada057b74</uuid>
-                        <uuid>834bc680-32b0-46e6-9f3b-c42977b9253e</uuid>
-                        <uuid>_a-0000db64-d317-8000-0315-010000010000_2020</uuid>
-                    <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37710</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37710</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37711</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37712</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37713</uuid>
@@ -82,46 +77,46 @@
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38178</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38179</uuid>
                         <uuid>f1a9ccd9-6628-4065-bef4-19b6fad6271b</uuid>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37726</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38167</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38168</uuid>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37728</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38169</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37726</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37728</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37729</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37730</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37731</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37732</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37733</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_37734</uuid>
-                        <uuid>052a2c3c-f53c-4255-8d56-8116bec2b9fe</uuid>
-                        <uuid>02f65980-f583-405e-9871-0e4f1eb8ec66</uuid>
-                        <uuid>dbe62397-15eb-454d-a414-446786db8c20</uuid>
-                        <uuid>281dab65-3e5f-456b-a78a-63d15876d325</uuid>
-                        <uuid>ae08a1ad-34a5-4738-8a7c-68df8e0aacbc</uuid>
-                        <uuid>26f370d1-4c8e-43d8-92b6-79d69e07fbca</uuid>
-                        <uuid>0e9a081c-49a5-43cc-a289-3dc226e387fd</uuid>
-                        <uuid>02a63997-9cc3-430d-b1d0-3999def4cb2d</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38186</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38138</uuid>
-                        <uuid>35e03406-970e-4069-9c46-ab2f45d78f02</uuid>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38163</uuid>
-                        <uuid>f333e97f-d1e9-410e-97d1-57a52a15801a</uuid>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38165</uuid>
-                        <uuid>5b477446-b4e9-41f7-b1fd-4dfa924b5992</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38161</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38162</uuid>
-                        <uuid>b10dd8a9-41dd-4524-ab87-d0f13ff2963c</uuid>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38166</uuid>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38186</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38163</uuid>
                         <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38164</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38165</uuid>
+                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38166</uuid>
+                        <uuid>b10dd8a9-41dd-4524-ab87-d0f13ff2963c</uuid>
+                        <uuid>dbe62397-15eb-454d-a414-446786db8c20</uuid>
+                        <uuid>281dab65-3e5f-456b-a78a-63d15876d325</uuid>
+                        <uuid>35e03406-970e-4069-9c46-ab2f45d78f02</uuid>
+                        <uuid>0e9a081c-49a5-43cc-a289-3dc226e387fd</uuid>
+                        <uuid>5b477446-b4e9-41f7-b1fd-4dfa924b5992</uuid>
+                        <uuid>26f370d1-4c8e-43d8-92b6-79d69e07fbca</uuid>
+                        <uuid>f333e97f-d1e9-410e-97d1-57a52a15801a</uuid>
+                        <uuid>02a63997-9cc3-430d-b1d0-3999def4cb2d</uuid>
+                        <uuid>ae08a1ad-34a5-4738-8a7c-68df8e0aacbc</uuid>
+                        <uuid>052a2c3c-f53c-4255-8d56-8116bec2b9fe</uuid>
+                        <uuid>02f65980-f583-405e-9871-0e4f1eb8ec66</uuid>
                         <uuid>3e2e3c97-8509-4ed1-b95b-4015b42aeee9</uuid>
                         <uuid>8a6ca824-5c2e-47e6-a57a-6ee329b2045c</uuid>
                         <uuid>9c9edd09-c26a-4a42-8766-9434c2cdc401</uuid>
-                        <uuid>_a-0000d618-256c-8000-da6f-010000010000_859</uuid>
-                        <uuid>_a-0000d615-4c22-8000-da6f-010000010000_777</uuid>
-                        <uuid>_a-0000d73e-944a-8000-9ba2-011c48011c48_13373</uuid>
                         <uuid>_a-0000d62a-67b3-8000-da6f-010000010000_951</uuid>
-                        <uuid>_a-0000d62a-67b3-8000-da6f-010000010000_957</uuid>
                         <uuid>_a-0000d690-12fb-8000-0f1a-010000010000_1352</uuid>
+                        <uuid>_a-0000d73e-944a-8000-9ba2-011c48011c48_13373</uuid>
+                        <uuid>_a-0000d62a-67b3-8000-da6f-010000010000_957</uuid>
+                        <uuid>_a-0000d615-4c22-8000-da6f-010000010000_777</uuid>
+                        <uuid>_a-0000d618-256c-8000-da6f-010000010000_859</uuid>
                     </uuids>
                 </item>
                 <item>
@@ -131,24 +126,22 @@
                 <item>
                     <type>processModelFolder</type>
                     <uuids>
-                        <uuid>_g-0000db64-d319-8000-0316-010000010000_1</uuid>
-                    <uuid>_g-0000dac9-8721-8000-f92f-7f0000014e7a_541</uuid>
+                        <uuid>_g-0000dac9-8721-8000-f92f-7f0000014e7a_541</uuid>
                     </uuids>
                 </item>
                 <item>
                     <type>processModel</type>
                     <uuids>
-                        <uuid>0003db65-da22-8000-0316-010000010000</uuid>
-                    <uuid>0008db1b-f8a8-8000-f92f-7f0000014e7a</uuid>
+                        <uuid>0007db19-427c-8000-f92f-7f0000014e7a</uuid>
+                        <uuid>0008db1b-f8a8-8000-f92f-7f0000014e7a</uuid>
                         <uuid>0006db1c-36df-8000-f92f-7f0000014e7a</uuid>
                         <uuid>000ddb1c-3da0-8000-f92f-7f0000014e7a</uuid>
                         <uuid>0008db1c-40a5-8000-f92f-7f0000014e7a</uuid>
                         <uuid>0007db1c-42e3-8000-f92f-7f0000014e7a</uuid>
                         <uuid>0007db1c-4679-8000-f92f-7f0000014e7a</uuid>
-                        <uuid>0006db1d-abce-8000-f92f-7f0000014e7a</uuid>
-                        <uuid>0007db1d-a8e6-8000-f92f-7f0000014e7a</uuid>
                         <uuid>0006db1c-4894-8000-f92f-7f0000014e7a</uuid>
-                        <uuid>0007db19-427c-8000-f92f-7f0000014e7a</uuid>
+                        <uuid>0007db1d-a8e6-8000-f92f-7f0000014e7a</uuid>
+                        <uuid>0006db1d-abce-8000-f92f-7f0000014e7a</uuid>
                     </uuids>
                 </item>
                 <item>
@@ -161,9 +154,7 @@
                 </item>
                 <item>
                     <type>application</type>
-                    <uuids>
-                        <uuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38191</uuid>
-                    </uuids>
+                    <uuids/>
                 </item>
                 <item>
                     <type>tempoFeed</type>
@@ -174,8 +165,7 @@
                 <item>
                     <type>recordType</type>
                     <uuids>
-                        <uuid>96bef044-77f0-4e9f-a515-bee5ae0a1588</uuid>
-                    <uuid>4b422118-4415-4c30-8519-264d11e5ee7c</uuid>
+                        <uuid>4b422118-4415-4c30-8519-264d11e5ee7c</uuid>
                     </uuids>
                 </item>
                 <item>
@@ -189,18 +179,17 @@
                     <type>taskReport</type>
                     <uuids/>
                 </item>
-                <item>
-                    <type>webApi</type>
-                    <uuids/>
-                </item>
-                <item>
-                    <type>site</type>
-                    <uuids/>
-                </item>
             </globalIdMap>
         </associatedObjects>
         <applicationNavigation/>
-        <applicationActions/>
+        <applicationActions>
+            <action>
+                <displayLabel>Create Meeting</displayLabel>
+                <description>Schedule a meeting with the Meeting Management System</description>
+                <processModelUuid>0007db19-427c-8000-f92f-7f0000014e7a</processModelUuid>
+                <actionUuid>0d0e0224-c1d4-4a67-9ac2-6f4abff3c544</actionUuid>
+            </action>
+        </applicationActions>
         <associatedApplications>
             <globalIdMap>
                 <item>
@@ -267,14 +256,6 @@
                     <type>taskReport</type>
                     <uuids/>
                 </item>
-                <item>
-                    <type>webApi</type>
-                    <uuids/>
-                </item>
-                <item>
-                    <type>site</type>
-                    <uuids/>
-                </item>
             </globalIdMap>
         </associatedApplications>
     </application>
@@ -290,7 +271,7 @@
             </role>
             <role allowForAll="false" inherit="false" name="administrators">
                 <users>
-                    <userUuid>Administrator</userUuid>
+                    <userUuid>nikita.rani</userUuid>
                 </users>
                 <groups/>
             </role>
@@ -309,3 +290,4 @@
         </contentRoleMap>
     </roleMap>
 </applicationHaul>
+ 

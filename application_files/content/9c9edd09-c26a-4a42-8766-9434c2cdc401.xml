@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_totalMeetingVolumeReport</name>
+        <uuid>9c9edd09-c26a-4a42-8766-9434c2cdc401</uuid>
+        <description>SAIL interface for the Total Meeting Volume report</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38179</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(&#xD;
+  local!chartPagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+    startIndex: 1,&#xD;
+    batchSize: -1,&#xD;
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(&#xD;
+      field: &quot;createMonthGrouped&quot;,&#xD;
+      ascending: true&#xD;
+    )&#xD;
+  ),&#xD;
+   local!gridPagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+    startIndex: 1,&#xD;
+    batchSize: 20,&#xD;
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(&#xD;
+      field: &quot;createdDate&quot;,&#xD;
+      ascending: true&#xD;
+    )&#xD;
+  ),&#xD;
+  local!selectedMonth,&#xD;
+  local!selectedDateRange: 12,&#xD;
+  with(&#xD;
+    local!chartDatasubset: #&quot;SYSTEM_SYSRULES_queryEntity&quot;(&#xD;
+      entity: #&quot;_a-0000dac9-871e-8000-9ba2-011c48011c48_37728&quot;,&#xD;
+      query: #&quot;SYSTEM_SYSRULES_query&quot;(&#xD;
+        aggregation: #&quot;SYSTEM_SYSRULES_queryAggregation&quot;(aggregationColumns: {&#xD;
+          #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(field: &quot;createMonth&quot;, alias: &quot;createMonthGrouped&quot;, isGrouping: true),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(field: &quot;meetingId&quot;, aggregationFunction: &quot;COUNT&quot;),&#xD;
+        }&#xD;
+        ),&#xD;
+        filter: #&quot;SYSTEM_SYSRULES_queryFilter&quot;(field: &quot;createdDate&quot;, operator: &quot;&gt;=&quot;, value: edate(today(),-local!selectedDateRange)),&#xD;
+        pagingInfo: local!chartPagingInfo&#xD;
+      )&#xD;
+    ),&#xD;
+    local!gridDatasubset: #&quot;SYSTEM_SYSRULES_queryEntity&quot;(&#xD;
+      entity: #&quot;_a-0000dac9-871e-8000-9ba2-011c48011c48_37728&quot;,&#xD;
+      query: #&quot;SYSTEM_SYSRULES_query&quot;(&#xD;
+        selection: #&quot;SYSTEM_SYSRULES_querySelection&quot;(columns: {&#xD;
+			        #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;creatorUsername&quot;),&#xD;
+              #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;subject&quot;),&#xD;
+              #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;createdDate&quot;)&#xD;
+        }),&#xD;
+        filter: if(&#xD;
+          isnull(local!selectedMonth),&#xD;
+          null,&#xD;
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(field: &quot;createMonth&quot;, operator: &quot;=&quot;, value: local!selectedMonth)&#xD;
+        ),&#xD;
+        pagingInfo: local!gridPagingInfo&#xD;
+      )&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(&#xD;
+      firstColumnContents:{&#xD;
+       #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+         firstColumnContents:{&#xD;
+       #&quot;SYSTEM_SYSRULES_dropdownField&quot;(&#xD;
+        label: &quot;Filter Date Range&quot;,&#xD;
+        instructions: &quot;Select a number of months to filter the report&quot;,&#xD;
+        choiceLabels: {&quot;Last 3 Months&quot;, &quot;Last 6 Months&quot;, &quot;Last 9 Months&quot;, &quot;Last 12 Months&quot;},&#xD;
+        choiceValues: {3,6,9,12},&#xD;
+        value: local!selectedDateRange,&#xD;
+        saveInto: local!selectedDateRange,&#xD;
+        required: true&#xD;
+      )&#xD;
+      },&#xD;
+      secondColumnContents:{&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          readOnly:true&#xD;
+        )&#xD;
+      }&#xD;
+      ),&#xD;
+    #&quot;SYSTEM_SYSRULES_pieChartField&quot;(&#xD;
+      series: {&#xD;
+        apply(&#xD;
+          #&quot;SYSTEM_SYSRULES_chartSeries&quot;(label: _, data: _,links: _),&#xD;
+          merge(&#xD;
+            index(local!chartDatasubset.data, &quot;createMonthGrouped&quot;, {}),&#xD;
+            index(local!chartDatasubset.data, &quot;meetingId&quot;, {}),&#xD;
+            apply(&#xD;
+            #&quot;8a6ca824-5c2e-47e6-a57a-6ee329b2045c&quot;(&#xD;
+                  monthValue: _,&#xD;
+                  selectedMonth: local!selectedMonth,&#xD;
+                  pagingInfo: local!gridPagingInfo&#xD;
+                ),&#xD;
+                index(local!chartDatasubset.data, &quot;createMonthGrouped&quot;, {})&#xD;
+              )&#xD;
+          )&#xD;
+        )&#xD;
+      },&#xD;
+      showDataLabels: true,&#xD;
+      showTooltips: true&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_gridField&quot;(&#xD;
+			label: &quot;Meetings&quot;,&#xD;
+      totalCount: local!gridDatasubset.totalCount,&#xD;
+			columns: {&#xD;
+			  #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Date Created&quot;, field: &quot;createdDate&quot;, data: index(local!gridDatasubset.data, &quot;createdDate&quot;, {})),&#xD;
+				#&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Creator&quot;, field: &quot;creatorUsername&quot;, data: apply(#&quot;_a-0000d690-12fb-8000-0f1a-010000010000_1352&quot;,index(local!gridDatasubset.data, &quot;creatorUsername&quot;, {}))),&#xD;
+				#&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(label: &quot;Subject&quot;, field: &quot;subject&quot;, data: index(local!gridDatasubset.data, &quot;subject&quot;, {}))&#xD;
+        },&#xD;
+        value: local!gridPagingInfo,&#xD;
+        saveInto: local!gridPagingInfo&#xD;
+    )&#xD;
+    }&#xD;
+    )&#xD;
+  )&#xD;
+)&#xD;
+</definition>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 

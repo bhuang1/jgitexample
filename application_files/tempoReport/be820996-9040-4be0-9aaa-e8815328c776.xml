@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tempoReportHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <tempoReport name="Average Meeting Usefulness" a:uuid="be820996-9040-4be0-9aaa-e8815328c776">
+        <a:description>Report to show average meeting usefulness per meeting creator</a:description>
+        <a:uiExpr>=#&quot;3e2e3c97-8509-4ed1-b95b-4015b42aeee9&quot;()</a:uiExpr>
+        <a:urlStub>2QuPmQ</a:urlStub>
+    </tempoReport>
+    <roleMap>
+        <role name="report_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dac9-8719-8000-9aee-01075c01075c_513</groupUuid>
+            </groups>
+        </role>
+        <role name="report_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dac9-8719-8000-9aee-01075c01075c_512</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</tempoReportHaul>
+ 

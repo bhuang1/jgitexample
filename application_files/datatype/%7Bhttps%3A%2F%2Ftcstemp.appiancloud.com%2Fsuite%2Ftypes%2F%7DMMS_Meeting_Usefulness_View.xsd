@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+  targetNamespace="https://tcstemp.appiancloud.com/suite/types/"
+  xmlns:tns="https://tcstemp.appiancloud.com/suite/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="MMS_Meeting_Usefulness_View">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+			@Table(name="MMS_Meeting_Usefulness_View")
+			</xsd:appinfo>
+      <xsd:documentation><![CDATA[CDT for the MMS_Meeting_Usefulness view]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="attendeeId" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">
+			@Id
+			@Column(name="attendeeId")		
+			</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="meetingId" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">			
+			@Column(name="meetingId")		
+			</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="creatorUsername" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">			
+			@Column(name="creatorUsername")		
+			</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="postMeetingRating" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">			
+			@Column(name="postMeetingRating")		
+			</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+ 

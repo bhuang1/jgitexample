@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_editMeetingUi</name>
+        <uuid>26f370d1-4c8e-43d8-92b6-79d69e07fbca</uuid>
+        <description>SAIL form to edit meeting details</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38136</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=&#xD;
+load(&#xD;
+ local!meeting:ri!meeting,&#xD;
+ local!attendeeUsernames:ri!attendeeUsernames,&#xD;
+ &#xD;
+ #&quot;SYSTEM_SYSRULES_formLayout&quot;(&#xD;
+  label: &quot;Edit the Meeting&quot;,&#xD;
+  instructions: &quot;Change the information below to edit the meeting details. Click 'Submit' to save changes. Click 'Cancel' to exit without saving any changes.&quot;,&#xD;
+  firstColumnContents: {&#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label: &quot;Meeting Details&quot;,&#xD;
+      firstColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Subject&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: local!meeting.subject,&#xD;
+          saveInto: local!meeting.subject,&#xD;
+          required: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(&#xD;
+          label: &quot;Description&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: local!meeting.description,&#xD;
+          saveInto: local!meeting.description,&#xD;
+          required: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_pickerFieldUsers&quot;(&#xD;
+          label: &quot;Attendees&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          groupFilter: #&quot;_a-0000dac9-871e-8000-9ba2-011c48011c48_37731&quot;,&#xD;
+          value: local!attendeeUsernames,&#xD;
+          saveInto: local!attendeeUsernames,&#xD;
+          required: true&#xD;
+        )&#xD;
+      },&#xD;
+      secondColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_dateTimeField&quot;(&#xD;
+          label: &quot;Start Time&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: local!meeting.startDateTime,&#xD;
+          saveInto: local!meeting.startDateTime,&#xD;
+          required: true,&#xD;
+          validations: if(ri!meeting.startDateTime&lt;now(),&quot;The meeting may not be scheduled in the past&quot;,null)&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_integerField&quot;(&#xD;
+          label: &quot;Duration (minutes)&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: local!meeting.durationMinutes,&#xD;
+          saveInto: local!meeting.durationMinutes,&#xD;
+          required: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Location&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,  &#xD;
+          value: local!meeting.location,&#xD;
+          saveInto: local!meeting.location,&#xD;
+          required: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_radioButtonField&quot;(&#xD;
+          label: &quot;Would you like to send reminders?&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          choiceLabels: {&quot;Yes&quot;, &quot;No&quot;},&#xD;
+          choiceValues: {true(), false()},&#xD;
+          value: local!meeting.sendReminders,&#xD;
+          saveInto: local!meeting.sendReminders,&#xD;
+          required: true&#xD;
+        )&#xD;
+      }&#xD;
+    )&#xD;
+  },&#xD;
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(&#xD;
+    primaryButtons: {&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label: &quot;Submit&quot;,&#xD;
+        style: &quot;PRIMARY&quot;,&#xD;
+        value: local!meeting,&#xD;
+        saveInto: {&#xD;
+          ri!meeting,&#xD;
+          a!save(ri!attendeeUsernames,local!attendeeUsernames)&#xD;
+        }&#xD;
+      )&#xD;
+    },&#xD;
+    secondaryButtons: {&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label: &quot;Cancel&quot;,&#xD;
+        style: &quot;NORMAL&quot;,&#xD;
+        value: true,&#xD;
+        saveInto: ri!cancel,&#xD;
+        skipValidation: true&#xD;
+      )&#xD;
+    }&#xD;
+  )&#xD;
+ )&#xD;
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>meeting</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>attendeeUsernames</name>
+            <type>
+                <name>Text?list</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 

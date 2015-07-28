@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_reviewReminderUi</name>
+        <uuid>ae08a1ad-34a5-4738-8a7c-68df8e0aacbc</uuid>
+        <description>SAIL form for the meeting creator to review the meeting reminder before posting to the news feed</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38136</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Review Meeting Reminder&quot;,
+  instructions: &quot;Please review the meeting reminder below. Click 'Submit' to post the meeting reminder to the news feed.&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Meeting Details&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Subject&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value: ri!meeting.subject,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+          label: &quot;Description&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value: ri!meeting.description,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Location&quot;,
+          labelPosition: &quot;ABOVE&quot;, 
+          value: ri!meeting.location,
+          readOnly: true
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_dateTimeField&quot;(
+          label: &quot;Start Time&quot;,
+          labelPosition: &quot;ABOVE&quot;,          
+          value: ri!meeting.startDateTime,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_integerField&quot;(
+          label: &quot;Duration (minutes)&quot;,
+          labelPosition: &quot;ABOVE&quot;,          
+          value: ri!meeting.durationMinutes,
+          readOnly: true
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+          label: &quot;Reminder&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          instructions: &quot;Please review the meeting reminder above. You may edit the text of the reminder if necessary. The reminder will be posted as a new entry to the news feed.&quot;,
+          value: ri!reminderMessage,
+          saveInto: ri!reminderMessage,
+          required: true
+        )
+      }
+    )
+  },
+  buttons: 
+  #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;
+      )
+    }
+  )
+)</definition>
+        <namedTypedValue>
+            <name>meeting</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>reminderMessage</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 

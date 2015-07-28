@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_cancelMeetingUi</name>
+        <uuid>0e9a081c-49a5-43cc-a289-3dc226e387fd</uuid>
+        <description>SAIL form to cancel a meeting</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38136</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=
+load(
+ local!attendeePagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex: 1, batchSize: 10, sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(field: &quot;username&quot;, ascending: true)),
+ 
+ with(
+  local!attendeeDatasubset: todatasubset(ri!attendees,local!attendeePagingInfo),
+ 
+#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Cancel Meeting&quot;,
+  instructions: &quot;Click 'Cancel' to cancel this meeting. Click 'Exit' to close the form without cancelling the meeting.&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Meeting Details&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Subject&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value: ri!meeting.subject,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+          label: &quot;Description&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value: ri!meeting.description,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Location&quot;,
+          labelPosition: &quot;ABOVE&quot;, 
+          value: ri!meeting.location,
+          readOnly: true
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_dateTimeField&quot;(
+          label: &quot;Start Time&quot;,
+          labelPosition: &quot;ABOVE&quot;,          
+          value: ri!meeting.startDateTime,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_integerField&quot;(
+          label: &quot;Duration (minutes)&quot;,
+          labelPosition: &quot;ABOVE&quot;,          
+          value: ri!meeting.durationMinutes,
+          readOnly: true
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Attendees&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          totalCount: local!attendeeDatasubset.totalCount,
+          columns: {
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: &quot;Attendee Name&quot;,
+              field: &quot;username&quot;,
+              data: apply(#&quot;_a-0000d690-12fb-8000-0f1a-010000010000_1352&quot;,index(local!attendeeDatasubset.data, &quot;username&quot;, {}))
+            )/*,
+            a!gridTextColumn(
+              label: &quot;Checked In?&quot;,
+              field: &quot;checkedIn&quot;,
+              data: if(index(local!attendeeDatasubset.data, &quot;checkedIn&quot;, {}), &quot;Yes&quot;, &quot;No&quot;)
+            ),
+            a!gridTextColumn(
+              label: &quot;Check-In Time&quot;,
+              field: &quot;checkInDateTime&quot;,
+              data: index(local!attendeeDatasubset.data, &quot;checkInDateTime&quot;, null)
+            )*/
+          },
+          value: local!attendeePagingInfo,
+          saveInto: local!attendeePagingInfo
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          readOnly:true
+        )
+      }
+    )
+  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;DESTRUCTIVE&quot;,
+        confirmMessage: &quot;Are you sure you want to cancel the meeting?&quot;
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Exit&quot;,
+        value: true,
+        saveInto: ri!exit
+      )
+    }
+  )
+ )
+ )
+)</definition>
+        <namedTypedValue>
+            <name>meeting</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>attendees</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>exit</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 

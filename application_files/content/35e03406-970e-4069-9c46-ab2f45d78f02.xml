@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_addNotesForm</name>
+        <uuid>35e03406-970e-4069-9c46-ab2f45d78f02</uuid>
+        <description>SAIL form for adding a meeting note</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38136</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Add Meeting Note&quot;,
+  instructions: &quot;Please enter a meeting note in the space provided below. Click 'Submit' to add the note to the meeting. Click 'Cancel' to close the form without adding the note to the meeting.&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;Meeting Details&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Subject&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value: ri!meeting.subject,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+          label: &quot;Description&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          value: ri!meeting.description,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          label: &quot;Location&quot;,
+          labelPosition: &quot;ABOVE&quot;, 
+          value: ri!meeting.location,
+          readOnly: true
+        )
+      },
+      secondColumnContents: {
+        #&quot;SYSTEM_SYSRULES_dateTimeField&quot;(
+          label: &quot;Start Time&quot;,
+          labelPosition: &quot;ABOVE&quot;,          
+          value: ri!meeting.startDateTime,
+          readOnly: true
+        ),
+        #&quot;SYSTEM_SYSRULES_integerField&quot;(
+          label: &quot;Duration (minutes)&quot;,
+          labelPosition: &quot;ABOVE&quot;,          
+          value: ri!meeting.durationMinutes,
+          readOnly: true
+        )
+      }
+    ),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label: &quot;&quot;,
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+          label: &quot;Note&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          instructions: &quot;Please write your meeting note above. The note will be added as a comment on the news feed post for the meeting.&quot;,
+          value: ri!note.notes,
+          saveInto: ri!note.notes,
+          required: true
+        )
+      }
+    )
+  },
+  buttons: 
+  #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  )
+)</definition>
+        <namedTypedValue>
+            <name>meeting</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>note</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 

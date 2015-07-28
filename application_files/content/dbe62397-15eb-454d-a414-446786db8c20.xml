@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_editMeetingRemindersForm</name>
+        <uuid>dbe62397-15eb-454d-a414-446786db8c20</uuid>
+        <description>SAIL form to edit the meeting reminder details</description>
+        <parentUuid>_a-0000dac9-871e-8000-9ba2-011c48011c48_38136</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=&#xD;
+load(&#xD;
+ local!selectedReminder: 'type!{https://tcstemp.appiancloud.com/suite/types/}MMS_Reminders'(),&#xD;
+ local!selectedReminderId,&#xD;
+ local!reminders: ri!reminders,&#xD;
+ local!reminderGridSelection: #&quot;SYSTEM_SYSRULES_gridSelection&quot;( &#xD;
+                                pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex: 1, batchSize: 10, sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(field: &quot;reminderDateTime&quot;, ascending: true))),&#xD;
+ &#xD;
+ with(&#xD;
+  local!reminderDatasubset: todatasubset(local!reminders,local!reminderGridSelection.pagingInfo),&#xD;
+ &#xD;
+ #&quot;SYSTEM_SYSRULES_formLayout&quot;(&#xD;
+  label: &quot;Edit Meeting Reminders&quot;,&#xD;
+  instructions: &quot;Select a reminder from the grid and click 'Edit' to change the reminder details. Click 'Update' to update the edited reminder in the grid. Click 'Submit' to save all changes made to the reminder(s) and submit the form. Click 'Cancel' to exit without saving changes to the reminder(s).&quot;,&#xD;
+  firstColumnContents: {&#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label: &quot;Meeting Details&quot;,&#xD;
+      firstColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Subject&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: ri!meeting.subject,&#xD;
+          readOnly: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(&#xD;
+          label: &quot;Description&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: ri!meeting.description,&#xD;
+          readOnly: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+          label: &quot;Location&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;, &#xD;
+          value: ri!meeting.location,&#xD;
+          readOnly: true&#xD;
+        )&#xD;
+      },&#xD;
+      secondColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_dateTimeField&quot;(&#xD;
+          label: &quot;Start Time&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,          &#xD;
+          value: ri!meeting.startDateTime,&#xD;
+          readOnly: true&#xD;
+        ),&#xD;
+        #&quot;SYSTEM_SYSRULES_integerField&quot;(&#xD;
+          label: &quot;Duration (minutes)&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,          &#xD;
+          value: ri!meeting.durationMinutes,&#xD;
+          readOnly: true&#xD;
+        )&#xD;
+      }&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label: &quot;Reminders&quot;,&#xD;
+      firstColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(&#xD;
+          label: &quot;&quot;,&#xD;
+          totalCount: local!reminderDatasubset.totalCount,&#xD;
+          columns: {&#xD;
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+              label: &quot;Time&quot;,&#xD;
+              field: &quot;reminderDateTime&quot;,&#xD;
+              data: index(local!reminderDatasubset.data, &quot;reminderDateTime&quot;, {})&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+              label: &quot;Review?&quot;,&#xD;
+              field: &quot;reviewBeforeSending&quot;,&#xD;
+              data: if(#&quot;_a-0000d62a-67b3-8000-da6f-010000010000_951&quot;({index(local!reminderDatasubset.data, &quot;reviewBeforeSending&quot;, null)}),{}, if(index(local!reminderDatasubset.data, &quot;reviewBeforeSending&quot;, null), &quot;Yes&quot;, &quot;No&quot;))&#xD;
+            )&#xD;
+          },&#xD;
+          identifiers: index(local!reminderDatasubset.data, &quot;reminderId&quot;, {}),&#xD;
+          value: local!reminderGridSelection,&#xD;
+          saveInto: {&#xD;
+            local!reminderGridSelection,&#xD;
+            if(&#xD;
+              count(local!reminderGridSelection.selected)&gt;1,&#xD;
+              {},&#xD;
+              a!save(local!selectedReminderId, index(save!value, &quot;selected&quot;, null))&#xD;
+            )&#xD;
+          },&#xD;
+          selection: true,&#xD;
+          validations: if(count(local!reminderGridSelection.selected)&gt;1, &quot;You may select only one reminder&quot;, null)&#xD;
+        )&#xD;
+      }&#xD;
+    ),&#xD;
+    if(#&quot;_a-0000d62a-67b3-8000-da6f-010000010000_951&quot;({local!selectedReminder.reminderDateTime}),{}, &#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      label: &quot;Reminder Details&quot;,&#xD;
+      firstColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_dateTimeField&quot;(&#xD;
+          label: &quot;Time&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          value: local!selectedReminder.reminderDateTime,&#xD;
+          saveInto: local!selectedReminder.reminderDateTime,&#xD;
+          required: true,&#xD;
+          validations: &#xD;
+            if(local!selectedReminder.reminderDateTime&lt;now(),&quot;The reminder may not be scheduled in the past&quot;,&#xD;
+              if(local!selectedReminder.reminderDateTime&gt;ri!meeting.startDateTime,&quot;The reminder must be before the start of the meeting&quot;,null)&#xD;
+            )&#xD;
+        )&#xD;
+      },&#xD;
+      secondColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_radioButtonField&quot;(&#xD;
+          label: &quot;Would you like to review the reminder before sending?&quot;,&#xD;
+          labelPosition: &quot;ABOVE&quot;,&#xD;
+          choiceLabels: {&quot;Yes&quot;, &quot;No&quot;},&#xD;
+          choiceValues: {true(), false()},&#xD;
+          value: local!selectedReminder.reviewBeforeSending,&#xD;
+          saveInto: local!selectedReminder.reviewBeforeSending,&#xD;
+          required: true&#xD;
+        )&#xD;
+      }&#xD;
+    ) &#xD;
+    )&#xD;
+  },&#xD;
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(&#xD;
+    primaryButtons: {&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidget&quot;(&#xD;
+        label: &quot;Edit&quot;,&#xD;
+        style: &quot;NORMAL&quot;,&#xD;
+        value: local!selectedReminderId,&#xD;
+        saveInto: {&#xD;
+          a!save(local!selectedReminder, index(local!reminders, lookup(local!reminders.reminderId,save!value),'type!{https://tcstemp.appiancloud.com/suite/types/}MMS_Reminders'()))&#xD;
+        },&#xD;
+        validate: true&#xD;
+      ),&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidget&quot;(&#xD;
+        label: &quot;Update&quot;,&#xD;
+        style: &quot;NORMAL&quot;,&#xD;
+        value: local!selectedReminder,&#xD;
+        saveInto: {&#xD;
+          a!save(local!reminders, updatearray(local!reminders, lookup(local!reminders.reminderId,local!selectedReminder.reminderId), save!value)),&#xD;
+          a!save(local!selectedReminderId, null),&#xD;
+          a!save(local!reminderGridSelection.selected, null),&#xD;
+          a!save(local!selectedReminder, 'type!{https://tcstemp.appiancloud.com/suite/types/}MMS_Reminders'())&#xD;
+        },&#xD;
+        validate: true&#xD;
+      ),&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label: &quot;Submit&quot;,&#xD;
+        style: &quot;PRIMARY&quot;,&#xD;
+        value: local!reminders,&#xD;
+        saveInto: ri!reminders&#xD;
+      )&#xD;
+    },&#xD;
+    secondaryButtons: {&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label: &quot;Cancel&quot;,&#xD;
+        style: &quot;NORMAL&quot;,&#xD;
+        skipValidation: true&#xD;
+      )&#xD;
+    }&#xD;
+  )&#xD;
+ )&#xD;
+ )&#xD;
+)</definition>
+        <namedTypedValue>
+            <name>meeting</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>reminders</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>nikita.rani</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
+ 
