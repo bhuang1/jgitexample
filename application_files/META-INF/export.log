@@ -369,5 +369,4 @@ Trace:
 2015-07-17 13:43:40.41 DEBUG recordType 2 96bef044-77f0-4e9f-a515-bee5ae0a1588 Object transported.
 2015-07-17 13:43:40.41 DEBUG application 2028 _a-0000db64-d317-8000-0315-010000010000_2028 Exporting binary resources.
 2015-07-17 13:43:40.41 DEBUG application 2028 _a-0000db64-d317-8000-0315-010000010000_2028 Serializing object to XML.
-2015-07-17 13:43:40.414 DEBUG application 2028 _a-0000db64-d317-8000-0315-010000010000_2028 Object transported.
- 
+2015-07-17 13:43:40.414 DEBUG application 2028 _a-0000db64-d317-8000-0315-010000010000_2028 Object transported.
